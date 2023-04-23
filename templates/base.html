@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bang4Buck</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+<style>
+    /* Navbar styling */
+    .navbar-brand {
+        font-weight: bold;
+        font-size: 30px;
+        color: #fff;
+    }
+
+    .navbar {
+        background-color: #1a3b5d; /* Changed to dark blue */
+        border-bottom: 1px solid #777;
+    }
+
+    .nav-item {
+        margin-right: 20px;
+    }
+
+    .nav-link {
+        font-size: 18px;
+        color: #fff;
+    }
+
+    .nav-link:hover {
+        color: #48a0e8 !important; /* Changed to lighter blue */
+    }
+
+    /* Hero section styling */
+    .hero-section {
+        position: relative;
+        background-image: url('https://source.unsplash.com/random/1920x600?electronics');
+        background-size: cover;
+        height: 600px;
+    }
+
+    .hero-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #fff;
+    }
+
+    /* Main content styling */
+    .container {
+        margin-top: 30px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+        color: #444;
+        margin-bottom: 20px;
+    }
+
+    p {
+        color: #555;
+        font-size: 18px;
+        line-height: 1.5;
+    }
+
+    /* Footer styling */
+    footer {
+        background-color: #1a3b5d; /* Changed to dark blue */
+        padding: 20px 0;
+        margin-top: 50px;
+    }
+
+    .footer-links li {
+        margin-bottom: 10px;
+    }
+
+    .footer-link {
+        color: #fff; /* Changed to white */
+        font-size: 16px;
+        transition: color 0.2s ease-in-out;
+    }
+
+    .footer-link:hover {
+        color: #48a0e8 !important; /* Changed to lighter blue */
+    }
+
+    .social-icons li {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .social-icon {
+        color: #fff; /* Changed to white */
+        font-size: 24px;
+        transition: color 0.2s ease-in-out;
+    }
+
+    .social-icon:hover {
+        color: #48a0e8; /* Changed to lighter blue */
+    }
+
+    /* Button styling */
+    .btn-primary {
+        background-color: #48a0e8; /* Changed to lighter blue */
+        border-color: #48a0e8; /* Changed to lighter blue */
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active {
+        background-color: #1a3b5d; /* Changed to dark blue */
+        border-color: #1a3b5d; /* Changed to dark blue */
+    }
+
+    /* Footer heading and paragraph text color */
+    footer h4, /* Changed to footer h4 */
+    footer p { /* Changed to footer p */
+        color: #fff; /* Changed to white */
+    }
+
+</style>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="{% url 'home' %}">Bang4Buck</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'all_categories' %}">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'compare' %}">Compare</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+  <footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Company</h4>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">About Us</a></li>
+                    <li><a href="#" class="footer-link">Contact Us</a></li>
+                    <li><a href="#" class="footer-link">Terms of Use</a></li>
+                    <li><a href="#" class="footer-link">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>Customer Service</h4>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">FAQs</a></li>
+                    <li><a href="#" class="footer-link">Shipping Information</a></li>
+                    <li><a href="#" class="footer-link">Returns &amp; Exchanges</a></li>
+                    <li><a href="#" class="footer-link">Product Support</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>Follow Us</h4>
+                <ul class="social-media">
+                    <li><a href="#"><i class="fab fa-facebook-square social-icon"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter-square social-icon"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram-square social-icon"></i></a></li>
+                    <li><a href="#"><i class="fab fa-youtube-square social-icon"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2022 Bang4Buck. All rights reserved.</p>
+                </div>
+                <div class="col-md-6">
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link">Terms of Use</a></li>
+                        <li><a href="#" class="footer-link">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

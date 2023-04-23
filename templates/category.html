@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ category.name }}</h1>
+    <form id="compare-form" method="get" action="{% url 'compare' %}">
+        <div class="row">
+            {% for product in products %}
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description }}</p>
+                        <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">View Details</a>
+                        <input type="checkbox" name="product{{ forloop.counter }}" value="{{ product.id }}">
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <input type="hidden" name="category" value="{{ category.id }}">
+        <button type="submit" class="btn btn-primary mt-3">Compare</button>
+    </form>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+$(function() {
+    $('#compare-form').submit(function(event) {
+        event.preventDefault();
+
+        var category_id = $('input[name="category"]').val();
+        var product1_id = $('input[name="product1"]:checked').val();
+        var product2_id = $('input[name="product2"]:checked').val();
+
+        // Check if two different products are selected
+        if (!product1_id || !product2_id || product1_id == product2_id) {
+            alert('Please select exactly 2 different products to compare.');
+            return;
+        }
+
+        var url = '/compare/?category=' + category_id + '&product1=' + product1_id + '&product2=' + product2_id;
+        window.location.href = url;
+    });
+});
+</script>
+{% endblock %}

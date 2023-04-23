@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ product.image.url }}" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+            <h1>{{ product.name }}</h1>
+            <p>{{ product.description }}</p>
+            <ul>
+                <li><strong>Price:</strong> {{ product.price }}</li>
+                <li><strong>Brand:</strong> {{ product.brand }}</li>
+                <li><strong>Category:</strong> {{ product.category.name }}</li>
+                <li><strong>Overall Score:</strong> {{ product.score }}</li>
+            </ul>
+{#            <a href="{% url 'compare' product.id %}" class="btn btn-primary">Compare</a>#}
+        </div>
+    </div>
+    <hr>
+    <h2>Reviews</h2>
+    {% for review in product.reviews.all %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ review.title }}</h5>
+            <p class="card-text">{{ review.content }}</p>
+            <p class="card-text"><small class="text-muted">Posted by {{ review.user.username }} on {{ review.created_at }}</small></p>
+        </div>
+    </div>
+    {% empty %}
+    <p>No reviews yet.</p>
+    {% endfor %}
+    <h2>Scores</h2>
+    <canvas id="myChart"></canvas>
+</div>
+{% endblock %}
+{% block script %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: ['{{ product.category.attribute1 }}', '{{ product.category.attribute2 }}'],
+            datasets: [{
+                label: '{{ product.name }}',
+                data: [{{ product.attribute1_rating }}, {{ product.attribute2_rating }}],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                r: {
+                    suggestedMin: 0,
+                    suggestedMax: 10
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

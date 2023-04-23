@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Compare Products</h1>
+
+    <form id="compare-form" method="get">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="category">Category</label>
+                  <select class="form-control" id="category" name="category">
+        <option value="">-- Select a category --</option>
+        {% for category in categories %}
+            <option value="{{ category.id }}" {% if category.id == category_id %}selected{% endif %}>{{ category.name }}</option>
+        {% endfor %}
+    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="product1">Product 1</label>
+                    <select class="form-control" id="product1" name="product1">
+                        <option value="">-- Select a product --</option>
+                        {% for product in products %}
+                        <option value="{{ product.id }}">{{ product.name }}</option>
+
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="product2">Product 2</label>
+                    <select class="form-control" id="product2" name="product2">
+                        <option value="">-- Select a product --</option>
+                        {% for product in products %}
+                        <option value="{{ product.id }}">{{ product.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary mt-4">Compare</button>
+            </div>
+        </div>
+    </form>
+
+    <hr>
+
+    {% if product1 and product2 %}
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ product1.image.url }}" class="img-fluid">
+            <h2>{{ product1.name }}</h2>
+            <ul>
+                <li><strong>Price:</strong> {{ product1.price }}</li>
+                <li><strong>Brand:</strong> {{ product1.brand }}</li>
+                <li><strong>Category:</strong> {{ product1.category.name }}</li>
+                <li><strong>Overall Score:</strong> {{ product1.score }}</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <img src="{{ product2.image.url }}" class="img-fluid">
+            <h2>{{ product2.name }}</h2>
+            <ul>
+                <li><strong>Price:</strong> {{ product2.price }}</li>
+                <li><strong>Brand:</strong> {{ product2.brand }}</li>
+                <li><strong>Category:</strong> {{ product2.category.name }}</li>
+                <li><strong>Overall Score:</strong> {{ product2.score }}</li>
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(function() {
+        $('#compare-form').submit(function(event) {
+            event.preventDefault();
+            var category_id = $('#category').val();
+            var product1_id = $('#product1').val();
+            var product2_id = $('#product2').val();
+            if (category_id && product1_id && product2_id) {
+                var url = '{% url "compare" category_id=category_id product1_id=product1_id product2_id=product2_id %}';
+                window.location.href = url;
+            }
+        });
+    });
+</script>
+{% endblock %}
