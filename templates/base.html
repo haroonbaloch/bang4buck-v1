@@ -129,17 +129,18 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand" href="{% url 'home' %}">Bang4Buck</a>
+         <a class="navbar-brand" href="{% url 'products:home' %}">Bang4Buck</a>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'all_categories' %}">Categories</a>
+                        <a class="nav-link" href="{% url 'products:all_categories' %}">Categories</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'compare' %}">Compare</a>
+                        <a class="nav-link" href="{% url 'products:compare' %}">Compare</a>
                     </li>
                 </ul>
             </div>
